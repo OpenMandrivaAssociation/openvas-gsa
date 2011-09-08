@@ -22,7 +22,7 @@ BuildRequires:  cmake >= 2.6.0
 BuildRequires:  doxygen
 BuildRequires:  glib2-devel
 BuildRequires:  libmicrohttpd-devel >= 0.4.2
-BuildRequires:  libopenvas-devel >= 3.98
+BuildRequires:  openvas-devel >= 3.98
 BuildRequires:  libxslt-devel
 BuildRequires:  pkgconfig
 Requires:       logrotate
