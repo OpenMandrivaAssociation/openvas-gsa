@@ -4,7 +4,7 @@ Name:           openvas-gsa
 Version:        2.0.1
 Release:        %mkrel 1
 License:        GPLv2+
-Group:          Productivity/Networking/Security
+Group:          System/Configuration/Networking
 Url:            http://www.openvas.org
 Source0:        greenbone-security-assistant-%{version}.tar.gz
 Source1:        gsad.logrotate
