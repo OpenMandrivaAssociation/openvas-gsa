@@ -1,3 +1,5 @@
+%define Werror_cflags -Wformat
+
 Name:           openvas-gsa
 Version:        2.0.1
 Release:        %mkrel 1
@@ -10,6 +12,7 @@ Source2:        debian.greenbone-security-assistant.default
 Source3:        gsad.init.suse
 Source4:        gsad.init.fedora
 Source5:        gsad.init.mandriva
+Patch0:		greenbone-security-assistant-2.0.1-werror.diff
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 BuildRequires:  pinentry-gtk2
@@ -34,22 +37,26 @@ vulnerability management.
 
 %prep
 %setup -q -n greenbone-security-assistant-%{version}
+%patch0 -p0 -b .werror
 
 %build
 %serverbuild
-
-export CFLAGS="%{optflags}"
+#export CFLAGS="%{optflags}"
 
 %cmake -DCMAKE_VERBOSE_MAKEFILE=ON \
         -DCMAKE_INSTALL_PREFIX=%{_prefix} \
         -DSYSCONFDIR=%{_sysconfdir} \
         -DLOCALSTATEDIR=%{_localstatedir} \
-        -DCMAKE_BUILD_TYPE=release
-
-%__make %{?_smp_mflags} VERBOSE=1
+        -DCMAKE_BUILD_TYPE=release \
+	-DUSE_LIBXSLT=0
+%{__mkdir_p} src/html
+%{__cp} -r ../src/html/* src/html
+%make  VERBOSE=1
 
 %install
+pushd build
 %__make install DESTDIR=%{buildroot}
+popd
 %__install -D -m 644 %{_sourcedir}/gsad.logrotate %{buildroot}%{_sysconfdir}/logrotate.d/greenbone-security-assistant
 
 %__install -D -m 755 %{_sourcedir}/gsad.init.mandriva %{buildroot}%{_initrddir}/greenbone-security-assistant
