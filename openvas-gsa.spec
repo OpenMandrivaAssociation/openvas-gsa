@@ -1,11 +1,12 @@
 %define Werror_cflags -Wformat
 
+Summary:        The Greenbone Security Assistant
 Name:           openvas-gsa
 Version:        2.0.1
-Release:        %mkrel 2
+Release:        %mkrel 3
 License:        GPLv2+
 Group:          System/Configuration/Networking
-Url:            http://www.openvas.org
+URL:            http://www.openvas.org
 Source0:        greenbone-security-assistant-%{version}.tar.gz
 Source1:        gsad.logrotate
 Source2:        debian.greenbone-security-assistant.default
@@ -13,11 +14,8 @@ Source3:        gsad.init.suse
 Source4:        gsad.init.fedora
 Source5:        gsad.init.mandriva
 Patch0:		greenbone-security-assistant-2.0.1-werror.diff
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-
 BuildRequires:  pinentry-gtk2
 BuildRequires:  xsltproc
-
 BuildRequires:  cmake >= 2.6.0
 BuildRequires:  doxygen
 BuildRequires:  glib2-devel
@@ -26,14 +24,13 @@ BuildRequires:  openvas-devel >= 3.98
 BuildRequires:  libxslt-devel
 BuildRequires:  pkgconfig
 Requires:       logrotate
-Summary:        The Greenbone Security Assistant
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The Greenbone Security Assistant is a web application that
 connects to the OpenVAS Manager and OpenVAS Administrator
 to provide for a full-featured user interface for
 vulnerability management.
-
 
 %prep
 %setup -q -n greenbone-security-assistant-%{version}
@@ -51,9 +48,11 @@ vulnerability management.
 	-DUSE_LIBXSLT=0
 %{__mkdir_p} src/html
 %{__cp} -r ../src/html/* src/html
-%make  VERBOSE=1
+%make VERBOSE=1
 
 %install
+rm -rf %{buildroot}
+
 pushd build
 %__make install DESTDIR=%{buildroot}
 popd
@@ -65,15 +64,14 @@ popd
 %__mkdir_p %{buildroot}%{_localstatedir}/log/openvas
 touch %{buildroot}%{_localstatedir}/log/openvas/gsad.log
 
-%clean
-test "%{buildroot}" != "/" && %__rm -rf %{buildroot}
-
 %post
 %_post_service greenbone-security-assistant
 
 %preun
 %_preun_service greenbone-security-assistant
 
+%clean
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
@@ -88,4 +86,3 @@ test "%{buildroot}" != "/" && %__rm -rf %{buildroot}
 %dir %{_localstatedir}/log/openvas
 %ghost %{_localstatedir}/log/openvas/gsad.log
 %config(noreplace) %{_sysconfdir}/sysconfig/greenbone-security-assistant
-
