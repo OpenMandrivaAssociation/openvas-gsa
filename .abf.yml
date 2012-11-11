@@ -1,0 +1,7 @@
+sources:
+  "debian.greenbone-security-assistant.default:"	f8e637d7ebc885e9ad957751d7a0b2ffa023fec8
+  "greenbone-security-assistant-2.0.1.tar.gz:"	46cc76df30e52700075796df31691c270d5f4564
+  "gsad.init.fedora:"	fe1adcfa87a73bd6bde415aad7bfd20da418ad8e
+  "gsad.init.mandriva:"	387fb286c59ec696180e567bd370ef035ef879e8
+  "gsad.init.suse:"	15310874fb0c80a728be3d86aa08cf81571b21c3
+  "gsad.logrotate:"	e88e6d9588f15434c0eeeab63c11b184e260920d

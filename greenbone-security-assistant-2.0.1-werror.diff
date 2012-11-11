@@ -1,0 +1,20 @@
+--- CMakeLists.txt	2011-03-02 12:43:39.000000000 +0100
++++ CMakeLists.txt.dlucio	2011-09-08 22:03:25.000000000 +0200
+@@ -345,7 +345,7 @@
+                src/html/img/style/window_dec_c_error.png
+          DESTINATION ${GSA_DATA_DIR}/img/style)
+ 
+-install (FILES src/gsad_log.conf
++install (FILES build/src/gsad_log.conf
+          DESTINATION ${GSA_CONFIG_DIR})
+ 
+ ## Program
+@@ -353,7 +353,7 @@
+ set (HARDENING_FLAGS            "-Wformat -Wformat-security -O2 -D_FORTIFY_SOURCE=2 -fstack-protector -Wl,-z,relro -Wl,-z,now")
+ 
+ set (CMAKE_C_FLAGS_DEBUG        "${CMAKE_C_FLAGS_DEBUG}")
+-set (CMAKE_C_FLAGS              "${CMAKE_C_FLAGS} ${HARDENING_FLAGS} -Wall -Werror")
++set (CMAKE_C_FLAGS              "${CMAKE_C_FLAGS} ${HARDENING_FLAGS} -Wall")
+ 
+ add_subdirectory (src)
+ 
