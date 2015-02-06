@@ -2,7 +2,7 @@
 
 Name:           openvas-gsa
 Version:        2.0.2
-Release:        1
+Release:        2
 License:        GPLv2+
 Group:          System/Configuration/Networking
 Url:            http://www.openvas.org
