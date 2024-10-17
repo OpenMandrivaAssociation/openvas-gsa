@@ -5,7 +5,7 @@ Version:        2.0.2
 Release:        2
 License:        GPLv2+
 Group:          System/Configuration/Networking
-Url:            http://www.openvas.org
+Url:            https://www.openvas.org
 Source0:        http://wald.intevation.org/frs/download.php/1157/greenbone-security-assistant-%{version}.tar.gz
 Source1:        gsad.logrotate
 Source2:        debian.greenbone-security-assistant.default
